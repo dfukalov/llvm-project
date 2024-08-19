@@ -9,7 +9,6 @@
 #ifndef LLVM_SUPPORT_CHRONO_H
 #define LLVM_SUPPORT_CHRONO_H
 
-#include "llvm/Support/Compiler.h"
 #include "llvm/Support/FormatProviders.h"
 
 #include <chrono>
@@ -17,8 +16,6 @@
 #include <ratio>
 
 namespace llvm {
-
-class raw_ostream;
 
 namespace sys {
 
