@@ -8,6 +8,7 @@
 
 #include "llvm/TargetParser/Host.h"
 #include "llvm/ADT/SmallVector.h"
+#include "llvm/ADT/StringSwitch.h"
 #include "llvm/Config/config.h"
 #include "llvm/Config/llvm-config.h" // for LLVM_HOST_TRIPLE
 #include "llvm/Support/FileSystem.h"

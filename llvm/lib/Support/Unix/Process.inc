@@ -12,11 +12,9 @@
 
 #include "Unix.h"
 #include "llvm/ADT/Hashing.h"
-#include "llvm/ADT/StringRef.h"
+#include "llvm/ADT/StringSwitch.h"
 #include "llvm/Config/config.h"
 #include "llvm/Config/llvm-config.h" // for LLVM_ENABLE_THREADS
-#include <mutex>
-#include <optional>
 #if HAVE_FCNTL_H
 #include <fcntl.h>
 #endif
