@@ -9,7 +9,7 @@
 #ifndef LLVM_SUPPORT_CHRONO_H
 #define LLVM_SUPPORT_CHRONO_H
 
-#include "llvm/Support/FormatProviders.h"
+#include "llvm/Support/FormatVariadicDetails.h"
 
 #include <chrono>
 #include <ctime>
