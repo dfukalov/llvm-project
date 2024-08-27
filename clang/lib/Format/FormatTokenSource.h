@@ -16,7 +16,6 @@
 #define LLVM_CLANG_LIB_FORMAT_FORMATTOKENSOURCE_H
 
 #include "UnwrappedLineParser.h"
-#include "llvm/Support/Debug.h"
 
 #define DEBUG_TYPE "format-token-source"
 

@@ -13,7 +13,6 @@
 #include "llvm/IR/Metadata.h"
 #include "llvm/IR/Module.h"
 #include "llvm/InitializePasses.h"
-#include "llvm/Support/Debug.h"
 
 #define DEBUG_TYPE "dxil-metadata-analysis"
 

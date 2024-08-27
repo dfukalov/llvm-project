@@ -7,7 +7,6 @@
 //===----------------------------------------------------------------------===//
 
 #include "llvm-dwarfdump.h"
-#include "llvm/Support/Debug.h"
 
 #define DEBUG_TYPE "dwarfdump"
 

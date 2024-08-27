@@ -23,7 +23,6 @@
 #include "UsingDeclarationsSorter.h"
 #include "clang/Tooling/Inclusions/HeaderIncludes.h"
 #include "llvm/ADT/Sequence.h"
-#include "llvm/Support/Debug.h"
 
 #define DEBUG_TYPE "format-formatter"
 
