@@ -26,6 +26,7 @@
 #include <type_traits>
 
 namespace llvm {
+
 class Duration;
 class formatv_object_base;
 class format_object_base;
