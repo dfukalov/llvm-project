@@ -17,6 +17,7 @@
 #include "llvm/ADT/Twine.h"
 #include "llvm/Config/config.h"
 #include "llvm/Config/llvm-config.h" // for LLVM_ENABLE_THREADS
+#include "llvm/Support/Compiler.h" // for LLVM_BUILTIN_UNREACHABLE
 #include "llvm/Support/Debug.h"
 #include "llvm/Support/Errc.h"
 #include "llvm/Support/Error.h"

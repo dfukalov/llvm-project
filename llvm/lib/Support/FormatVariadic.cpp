@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //===----------------------------------------------------------------------===//
 
+#include "llvm/Support/Compiler.h" // for LLVM_BUILTIN_UNREACHABLE
 #include "llvm/Support/FormatVariadic.h"
 #include <cassert>
 #include <optional>
@@ -22,7 +23,9 @@ static std::optional<AlignStyle> translateLocChar(char C) {
   default:
     return std::nullopt;
   }
+#if defined(LLVM_BUILTIN_UNREACHABLE)
   LLVM_BUILTIN_UNREACHABLE;
+#endif
 }
 
 static bool consumeFieldLayout(StringRef &Spec, AlignStyle &Where,

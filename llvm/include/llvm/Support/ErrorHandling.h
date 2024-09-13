@@ -15,7 +15,7 @@
 #define LLVM_SUPPORT_ERRORHANDLING_H
 
 #include "llvm/Config/llvm-config.h" // for LLVM_UNREACHABLE_OPTIMIZE
-#include "llvm/Support/Compiler.h"
+#include "llvm/Support/Compiler.h" // for LLVM_BUILTIN_UNREACHABLE
 
 namespace llvm {
   class StringRef;

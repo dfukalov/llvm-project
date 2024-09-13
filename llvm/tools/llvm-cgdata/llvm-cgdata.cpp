@@ -13,6 +13,7 @@
 //
 //===----------------------------------------------------------------------===//
 #include "llvm/ADT/StringRef.h"
+#include "llvm/ADT/StringSwitch.h"
 #include "llvm/CGData/CodeGenDataReader.h"
 #include "llvm/CGData/CodeGenDataWriter.h"
 #include "llvm/IR/LLVMContext.h"
