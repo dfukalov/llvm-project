@@ -1,0 +1,8 @@
+-- Testing: 2 tests, 2 workers --
+PASS: LLVM :: CodeGen/AMDGPU/rem_i128.ll (1 of 2)
+PASS: LLVM :: CodeGen/AMDGPU/div_i128.ll (2 of 2)
+
+Testing Time: 0.82s
+
+Total Discovered Tests: 2
+  Passed: 2 (100.00%)

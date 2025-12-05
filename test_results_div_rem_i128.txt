@@ -1,0 +1,330 @@
+-- Testing: 2 tests, 2 workers --
+FAIL: LLVM :: CodeGen/AMDGPU/div_i128.ll (1 of 2)
+******************** TEST 'LLVM :: CodeGen/AMDGPU/div_i128.ll' FAILED ********************
+Exit Code: 1
+
+Command Output (stdout):
+--
+# RUN: at line 2
+/home/dfukalov/llvm-project/build_dbg/bin/llc -global-isel=0 -mtriple=amdgcn-amd-amdhsa -mcpu=gfx900 -o - /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/div_i128.ll | /home/dfukalov/llvm-project/build_dbg/bin/FileCheck -check-prefixes=GFX9 /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/div_i128.ll
+# executed command: /home/dfukalov/llvm-project/build_dbg/bin/llc -global-isel=0 -mtriple=amdgcn-amd-amdhsa -mcpu=gfx900 -o - /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/div_i128.ll
+# executed command: /home/dfukalov/llvm-project/build_dbg/bin/FileCheck -check-prefixes=GFX9 /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/div_i128.ll
+# RUN: at line 3
+/home/dfukalov/llvm-project/build_dbg/bin/llc -O0 -global-isel=0 -mtriple=amdgcn-amd-amdhsa -mcpu=gfx900 -o - /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/div_i128.ll | /home/dfukalov/llvm-project/build_dbg/bin/FileCheck -check-prefixes=GFX9-O0 /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/div_i128.ll
+# executed command: /home/dfukalov/llvm-project/build_dbg/bin/llc -O0 -global-isel=0 -mtriple=amdgcn-amd-amdhsa -mcpu=gfx900 -o - /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/div_i128.ll
+# executed command: /home/dfukalov/llvm-project/build_dbg/bin/FileCheck -check-prefixes=GFX9-O0 /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/div_i128.ll
+# .---command stderr------------
+# | /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/div_i128.ll:223:17: error: GFX9-O0-NEXT: expected string not found in input
+# | ; GFX9-O0-NEXT: buffer_store_dword v30, off, s[0:3], s32 offset:308 ; 4-byte Folded Spill
+# |                 ^
+# | <stdin>:10:31: note: scanning from here
+# |  s_xor_saveexec_b64 s[4:5], -1
+# |                               ^
+# | <stdin>:11:2: note: possible intended match here
+# |  buffer_store_dword v30, off, s[0:3], s32 offset:320 ; 4-byte Folded Spill
+# |  ^
+# | /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/div_i128.ll:2458:17: error: GFX9-O0-NEXT: is not on the line after the previous match
+# | ; GFX9-O0-NEXT: s_mov_b64 s[6:7], 0
+# |                 ^
+# | <stdin>:1713:2: note: 'next' match was here
+# |  s_mov_b64 s[6:7], 0
+# |  ^
+# | <stdin>:1044:22: note: previous match ended here
+# |  v_mov_b32_e32 v1, v2
+# |                      ^
+# | <stdin>:1045:1: note: non-matching line after previous match is here
+# |  s_mov_b64 s[8:9], 0
+# | ^
+# | /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/div_i128.ll:4273:17: error: GFX9-O0-NEXT: is not on the line after the previous match
+# | ; GFX9-O0-NEXT: v_mov_b32_e32 v4, v2
+# |                 ^
+# | <stdin>:1911:2: note: 'next' match was here
+# |  v_mov_b32_e32 v4, v2
+# |  ^
+# | <stdin>:1877:41: note: previous match ended here
+# |  s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+# |                                         ^
+# | <stdin>:1878:1: note: non-matching line after previous match is here
+# |  s_xor_saveexec_b64 s[4:5], -1
+# | ^
+# | /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/div_i128.ll:4397:17: error: GFX9-O0-NEXT: is not on the line after the previous match
+# | ; GFX9-O0-NEXT: v_mov_b32_e32 v5, v2
+# |                 ^
+# | <stdin>:3108:2: note: 'next' match was here
+# |  v_mov_b32_e32 v5, v21
+# |  ^
+# | <stdin>:2772:41: note: previous match ended here
+# |  s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+# |                                         ^
+# | <stdin>:2773:1: note: non-matching line after previous match is here
+# |  s_xor_saveexec_b64 s[4:5], -1
+# | ^
+# | 
+# | Input file: <stdin>
+# | Check file: /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/div_i128.ll
+# | 
+# | -dump-input=help explains the following input dump.
+# | 
+# | Input was:
+# | <<<<<<
+# |             .
+# |             .
+# |             .
+# |             5:  .p2align 2 
+# |             6:  .type v_sdiv_i128_vv,@function 
+# |             7: v_sdiv_i128_vv: ; @v_sdiv_i128_vv 
+# |             8: ; %bb.0: ; %_udiv-special-cases 
+# |             9:  s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0) 
+# |            10:  s_xor_saveexec_b64 s[4:5], -1 
+# | next:223'0                                   X error: no match found
+# |            11:  buffer_store_dword v30, off, s[0:3], s32 offset:320 ; 4-byte Folded Spill 
+# | next:223'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | next:223'1      ?                                                                          possible intended match
+# |            12:  s_mov_b64 exec, s[4:5] 
+# | next:223'0     ~~~~~~~~~~~~~~~~~~~~~~~~
+# |            13:  buffer_store_dword v7, off, s[0:3], s32 offset:92 ; 4-byte Folded Spill 
+# | next:223'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |            14:  buffer_store_dword v6, off, s[0:3], s32 offset:88 ; 4-byte Folded Spill 
+# | next:223'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |            15:  v_mov_b32_e32 v6, v4 
+# | next:223'0     ~~~~~~~~~~~~~~~~~~~~~~
+# |            16:  buffer_load_dword v4, off, s[0:3], s32 offset:92 ; 4-byte Folded Reload 
+# | next:223'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |             .
+# |             .
+# |             .
+# |          1708:  s_waitcnt vmcnt(1) 
+# |          1709:  v_mov_b32_e32 v2, v0 
+# |          1710:  s_mov_b32 s4, s7 
+# |          1711:  s_waitcnt vmcnt(0) 
+# |          1712:  v_mov_b32_e32 v4, v1 
+# |          1713:  s_mov_b64 s[6:7], 0 
+# | next:2458       !~~~~~~~~~~~~~~~~~~  error: match on wrong line
+# |          1714:  s_mov_b32 s8, s6 
+# |          1715:  s_mov_b32 s9, s7 
+# |          1716:  v_mov_b32_e32 v0, v8 
+# |          1717:  v_mov_b32_e32 v3, v9 
+# |          1718:  v_mov_b32_e32 v1, s5 
+# |             .
+# |             .
+# |             .
+# |          1906:  v_xor_b32_e64 v4, v5, v4 
+# |          1907:  ; kill: def $vgpr2 killed $vgpr2 killed $vgpr2_vgpr3 killed $exec 
+# |          1908:  v_xor_b32_e64 v2, v7, v2 
+# |          1909:  ; kill: def $vgpr2 killed $vgpr2 def $vgpr2_vgpr3 killed $exec 
+# |          1910:  v_mov_b32_e32 v3, v4 
+# |          1911:  v_mov_b32_e32 v4, v2 
+# | next:4273       !~~~~~~~~~~~~~~~~~~~  error: match on wrong line
+# |          1912:  ; kill: def $vgpr3 killed $vgpr3 killed $vgpr2_vgpr3 killed $exec 
+# |          1913:  v_mov_b32_e32 v6, v8 
+# |          1914:  v_mov_b32_e32 v2, v9 
+# |          1915:  v_sub_co_u32_e32 v4, vcc, v4, v7 
+# |          1916:  v_subb_co_u32_e32 v3, vcc, v3, v5, vcc 
+# |             .
+# |             .
+# |             .
+# |          3103:  buffer_load_dword v13, off, s[0:3], s32 offset:220 ; 4-byte Folded Reload 
+# |          3104:  buffer_load_dword v14, off, s[0:3], s32 offset:224 ; 4-byte Folded Reload 
+# |          3105:  s_mov_b32 s10, 63 
+# |          3106:  s_waitcnt vmcnt(8) 
+# |          3107:  v_lshrrev_b64 v[20:21], s10, v[2:3] 
+# |          3108:  v_mov_b32_e32 v5, v21 
+# | next:4397       !~~~~~~~~~~~~~~~~~~~   error: match on wrong line
+# |          3109:  s_mov_b32 s11, 1 
+# |          3110:  v_lshlrev_b64 v[11:12], s11, v[10:11] 
+# |          3111:  v_mov_b32_e32 v4, v12 
+# |          3112:  v_or_b32_e64 v4, v4, v5 
+# |          3113:  v_mov_b32_e32 v10, v20 
+# |             .
+# |             .
+# |             .
+# | >>>>>>
+# `-----------------------------
+# error: command failed with exit status: 1
+
+--
+
+********************
+FAIL: LLVM :: CodeGen/AMDGPU/rem_i128.ll (2 of 2)
+******************** TEST 'LLVM :: CodeGen/AMDGPU/rem_i128.ll' FAILED ********************
+Exit Code: 1
+
+Command Output (stdout):
+--
+# RUN: at line 2
+/home/dfukalov/llvm-project/build_dbg/bin/llc -global-isel=0 -mtriple=amdgcn-amd-amdhsa -mcpu=gfx900 -o - /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/rem_i128.ll | /home/dfukalov/llvm-project/build_dbg/bin/FileCheck -check-prefixes=GFX9,GFX9-SDAG /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/rem_i128.ll
+# executed command: /home/dfukalov/llvm-project/build_dbg/bin/llc -global-isel=0 -mtriple=amdgcn-amd-amdhsa -mcpu=gfx900 -o - /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/rem_i128.ll
+# executed command: /home/dfukalov/llvm-project/build_dbg/bin/FileCheck -check-prefixes=GFX9,GFX9-SDAG /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/rem_i128.ll
+# RUN: at line 3
+/home/dfukalov/llvm-project/build_dbg/bin/llc -O0 -global-isel=0 -mtriple=amdgcn-amd-amdhsa -mcpu=gfx900 -o - /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/rem_i128.ll | /home/dfukalov/llvm-project/build_dbg/bin/FileCheck -check-prefixes=GFX9-O0,GFX9-SDAG-O0 /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/rem_i128.ll
+# executed command: /home/dfukalov/llvm-project/build_dbg/bin/llc -O0 -global-isel=0 -mtriple=amdgcn-amd-amdhsa -mcpu=gfx900 -o - /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/rem_i128.ll
+# executed command: /home/dfukalov/llvm-project/build_dbg/bin/FileCheck -check-prefixes=GFX9-O0,GFX9-SDAG-O0 /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/rem_i128.ll
+# .---command stderr------------
+# | /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/rem_i128.ll:242:17: error: GFX9-O0-NEXT: expected string not found in input
+# | ; GFX9-O0-NEXT: buffer_store_dword v30, off, s[0:3], s32 offset:340 ; 4-byte Folded Spill
+# |                 ^
+# | <stdin>:10:31: note: scanning from here
+# |  s_xor_saveexec_b64 s[4:5], -1
+# |                               ^
+# | <stdin>:11:2: note: possible intended match here
+# |  buffer_store_dword v31, off, s[0:3], s32 offset:356 ; 4-byte Folded Spill
+# |  ^
+# | /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/rem_i128.ll:1661:17: error: GFX9-O0-NEXT: is not on the line after the previous match
+# | ; GFX9-O0-NEXT: s_mov_b64 s[6:7], 0
+# |                 ^
+# | <stdin>:1990:2: note: 'next' match was here
+# |  s_mov_b64 s[6:7], 0
+# |  ^
+# | <stdin>:1321:22: note: previous match ended here
+# |  v_mov_b32_e32 v1, v2
+# |                      ^
+# | <stdin>:1322:1: note: non-matching line after previous match is here
+# |  s_mov_b64 s[8:9], 0
+# | ^
+# | /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/rem_i128.ll:2666:17: error: GFX9-O0-NEXT: is not on the line after the previous match
+# | ; GFX9-O0-NEXT: v_mov_b32_e32 v6, v2
+# |                 ^
+# | <stdin>:2807:2: note: 'next' match was here
+# |  v_mov_b32_e32 v6, v21
+# |  ^
+# | <stdin>:2393:41: note: previous match ended here
+# |  s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+# |                                         ^
+# | <stdin>:2394:1: note: non-matching line after previous match is here
+# |  s_xor_saveexec_b64 s[4:5], -1
+# | ^
+# | /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/rem_i128.ll:2743:17: error: GFX9-O0-NEXT: expected string not found in input
+# | ; GFX9-O0-NEXT: buffer_store_dword v3, off, s[0:3], s32 ; 4-byte Folded Spill
+# |                 ^
+# | <stdin>:3540:41: note: scanning from here
+# |  s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0)
+# |                                         ^
+# | <stdin>:3552:2: note: possible intended match here
+# |  buffer_store_dword v0, off, s[0:3], s32 offset:60 ; 4-byte Folded Spill
+# |  ^
+# | 
+# | Input file: <stdin>
+# | Check file: /home/dfukalov/llvm-project/llvm/test/CodeGen/AMDGPU/rem_i128.ll
+# | 
+# | -dump-input=help explains the following input dump.
+# | 
+# | Input was:
+# | <<<<<<
+# |              .
+# |              .
+# |              .
+# |              5:  .p2align 2 
+# |              6:  .type v_srem_i128_vv,@function 
+# |              7: v_srem_i128_vv: ; @v_srem_i128_vv 
+# |              8: ; %bb.0: ; %_udiv-special-cases 
+# |              9:  s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0) 
+# |             10:  s_xor_saveexec_b64 s[4:5], -1 
+# | next:242'0                                    X error: no match found
+# |             11:  buffer_store_dword v31, off, s[0:3], s32 offset:356 ; 4-byte Folded Spill 
+# | next:242'0      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | next:242'1       ?                                                                          possible intended match
+# |             12:  s_mov_b64 exec, s[4:5] 
+# | next:242'0      ~~~~~~~~~~~~~~~~~~~~~~~~
+# |             13:  buffer_store_dword v6, off, s[0:3], s32 offset:128 ; 4-byte Folded Spill 
+# | next:242'0      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |             14:  v_mov_b32_e32 v6, v5 
+# | next:242'0      ~~~~~~~~~~~~~~~~~~~~~~
+# |             15:  buffer_load_dword v5, off, s[0:3], s32 offset:128 ; 4-byte Folded Reload 
+# | next:242'0      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |             16:  s_nop 0 
+# | next:242'0      ~~~~~~~~~
+# |              .
+# |              .
+# |              .
+# |           1985:  s_waitcnt vmcnt(1) 
+# |           1986:  v_mov_b32_e32 v2, v0 
+# |           1987:  s_mov_b32 s4, s7 
+# |           1988:  s_waitcnt vmcnt(0) 
+# |           1989:  v_mov_b32_e32 v4, v1 
+# |           1990:  s_mov_b64 s[6:7], 0 
+# | next:1661        !~~~~~~~~~~~~~~~~~~  error: match on wrong line
+# |           1991:  s_mov_b32 s8, s6 
+# |           1992:  s_mov_b32 s9, s7 
+# |           1993:  v_mov_b32_e32 v0, v8 
+# |           1994:  v_mov_b32_e32 v3, v9 
+# |           1995:  v_mov_b32_e32 v1, s5 
+# |              .
+# |              .
+# |              .
+# |           2802:  v_mov_b32_e32 v5, v2 
+# |           2803:  v_lshlrev_b64 v[2:3], s11, v[0:1] 
+# |           2804:  v_lshlrev_b64 v[20:21], s11, v[6:7] 
+# |           2805:  v_lshrrev_b64 v[0:1], s10, v[0:1] 
+# |           2806:  v_mov_b32_e32 v7, v1 
+# |           2807:  v_mov_b32_e32 v6, v21 
+# | next:2666        !~~~~~~~~~~~~~~~~~~~   error: match on wrong line
+# |           2808:  s_waitcnt vmcnt(2) 
+# |           2809:  v_mov_b32_e32 v10, v19 
+# |           2810:  v_or3_b32 v6, v6, v7, v10 
+# |           2811:  v_mov_b32_e32 v1, v0 
+# |           2812:  v_mov_b32_e32 v0, v20 
+# |              .
+# |              .
+# |              .
+# |           3535:  .globl v_urem_i128_v_pow2k ; -- Begin function v_urem_i128_v_pow2k 
+# |           3536:  .p2align 2 
+# |           3537:  .type v_urem_i128_v_pow2k,@function 
+# |           3538: v_urem_i128_v_pow2k: ; @v_urem_i128_v_pow2k 
+# |           3539: ; %bb.0: ; %_udiv-special-cases 
+# |           3540:  s_waitcnt vmcnt(0) expcnt(0) lgkmcnt(0) 
+# | next:2743'0                                             X error: no match found
+# |           3541:  s_xor_saveexec_b64 s[4:5], -1 
+# | next:2743'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |           3542:  buffer_store_dword v24, off, s[0:3], s32 offset:276 ; 4-byte Folded Spill 
+# | next:2743'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |           3543:  s_mov_b64 exec, s[4:5] 
+# | next:2743'0     ~~~~~~~~~~~~~~~~~~~~~~~~
+# |           3544:  v_mov_b32_e32 v10, v2 
+# | next:2743'0     ~~~~~~~~~~~~~~~~~~~~~~~
+# |           3545:  v_mov_b32_e32 v4, v0 
+# | next:2743'0     ~~~~~~~~~~~~~~~~~~~~~~
+# |           3546:  ; kill: def $vgpr4 killed $vgpr4 def $vgpr4_vgpr5 killed $exec 
+# | next:2743'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |           3547:  v_mov_b32_e32 v5, v1 
+# | next:2743'0     ~~~~~~~~~~~~~~~~~~~~~~
+# |           3548:  ; kill: def $vgpr10 killed $vgpr10 def $vgpr10_vgpr11 killed $exec 
+# | next:2743'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |           3549:  v_mov_b32_e32 v11, v3 
+# | next:2743'0     ~~~~~~~~~~~~~~~~~~~~~~~
+# |           3550:  v_mov_b32_e32 v0, v10 
+# | next:2743'0     ~~~~~~~~~~~~~~~~~~~~~~~
+# |           3551:  v_mov_b32_e32 v1, v11 
+# | next:2743'0     ~~~~~~~~~~~~~~~~~~~~~~~
+# |           3552:  buffer_store_dword v0, off, s[0:3], s32 offset:60 ; 4-byte Folded Spill 
+# | next:2743'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | next:2743'1      ?                                                                        possible intended match
+# |           3553:  s_nop 0 
+# | next:2743'0     ~~~~~~~~~
+# |           3554:  buffer_store_dword v1, off, s[0:3], s32 offset:64 ; 4-byte Folded Spill 
+# | next:2743'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |           3555:  v_mov_b32_e32 v0, v4 
+# | next:2743'0     ~~~~~~~~~~~~~~~~~~~~~~
+# |           3556:  v_mov_b32_e32 v1, v5 
+# | next:2743'0     ~~~~~~~~~~~~~~~~~~~~~~
+# |           3557:  buffer_store_dword v0, off, s[0:3], s32 offset:52 ; 4-byte Folded Spill 
+# | next:2743'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |              .
+# |              .
+# |              .
+# | >>>>>>
+# `-----------------------------
+# error: command failed with exit status: 1
+
+--
+
+********************
+********************
+Failed Tests (2):
+  LLVM :: CodeGen/AMDGPU/div_i128.ll
+  LLVM :: CodeGen/AMDGPU/rem_i128.ll
+
+
+Testing Time: 0.69s
+
+Total Discovered Tests: 2
+  Failed: 2 (100.00%)

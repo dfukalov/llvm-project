@@ -102,9 +102,12 @@ static bool runImpl(Function &F, const TargetLowering &TLI) {
       if (!IntTy || IntTy->getIntegerBitWidth() <= MaxLegalDivRemBitWidth)
         continue;
 
-      // The backend has peephole optimizations for powers of two.
+      // The backend has peephole optimizations for powers of two,
+      // unless the target explicitly requests expansion.
       // TODO: We don't consider vectors here.
-      if (isConstantPowerOfTwo(I.getOperand(1), isSigned(I.getOpcode())))
+      Type *Ty = I.getType()->getScalarType();
+      if (isConstantPowerOfTwo(I.getOperand(1), isSigned(I.getOpcode())) &&
+          !TLI.shouldExpandPowerOf2DivRem(TLI.getValueType(F.getDataLayout(), Ty)))
         continue;
 
       if (I.getOperand(0)->getType()->isVectorTy())
