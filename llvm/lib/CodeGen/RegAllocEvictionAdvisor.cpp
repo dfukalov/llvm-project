@@ -12,6 +12,7 @@
 #include "llvm/CodeGen/RegAllocEvictionAdvisor.h"
 #include "AllocationOrder.h"
 #include "RegAllocGreedy.h"
+#include "llvm/ADT/SmallVector.h"
 #include "llvm/CodeGen/LiveRegMatrix.h"
 #include "llvm/CodeGen/MachineBlockFrequencyInfo.h"
 #include "llvm/CodeGen/MachineFunction.h"
@@ -272,6 +273,7 @@ bool DefaultEvictionAdvisor::canEvictInterferenceBasedOnCost(
   unsigned Cascade = RA.getExtraInfo().getCascadeOrCurrentNext(VirtReg.reg());
 
   EvictionCost Cost;
+  SmallVector<const LiveInterval *, 8> ReassignCandidates;
   for (MCRegUnit Unit : TRI->regunits(PhysReg)) {
     LiveIntervalUnion::Query &Q = Matrix->query(VirtReg, Unit);
     // If there is 10 or more interferences, chances are one is heavier.
@@ -325,11 +327,16 @@ bool DefaultEvictionAdvisor::canEvictInterferenceBasedOnCost(
       // If !MaxCost.isMax(), then we're just looking for a cheap register.
       // Evicting another local live range in this case could lead to suboptimal
       // coloring.
-      if (!MaxCost.isMax() && IsLocal && LIS->intervalIsInOneMBB(*Intf) &&
-          (!EnableLocalReassign || !canReassign(*Intf, PhysReg))) {
-        return false;
+      if (!MaxCost.isMax() && IsLocal && LIS->intervalIsInOneMBB(*Intf)) {
+        if (!EnableLocalReassign)
+          return false;
+        ReassignCandidates.push_back(Intf);
       }
     }
+  }
+  for (const LiveInterval *Intf : ReassignCandidates) {
+    if (!canReassign(*Intf, PhysReg))
+      return false;
   }
   MaxCost = Cost;
   return true;
