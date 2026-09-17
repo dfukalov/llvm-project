@@ -597,9 +597,9 @@ RegAllocEvictionAdvisor::ReassignmentCache::checkInterference(
     const LiveInterval &VirtReg, MCRegUnit Unit,
     const LiveIntervalUnion &Union) {
   assert(VirtReg.segments.size() == 1 && !VirtReg.hasSubRanges());
-  auto CachedBlocker = Blockers.find(static_cast<unsigned>(Unit));
-  if (CachedBlocker != Blockers.end()) {
-    const Blocker &Entry = CachedBlocker->second;
+  auto BlockerIt = Blockers.find(static_cast<unsigned>(Unit));
+  if (BlockerIt != Blockers.end()) {
+    const Blocker &Entry = BlockerIt->second;
     if (Entry.Tag == Union.getTag() && VirtReg.beginIndex() < Entry.End &&
         Entry.Start < VirtReg.endIndex())
       return Cached;
